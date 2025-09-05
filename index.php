@@ -1,8 +1,17 @@
 <?php
-// Define o diretório base que você quer listar
-$baseDir = __DIR__; // __DIR__ pega o diretório atual do script (htdocs)
+// Função para verificar se o diretório está oculto no Windows
+function isHidden($path) {
+    $output = [];
+    @exec("attrib " . escapeshellarg($path), $output);
+    if (!empty($output)) {
+        // Se tiver 'H' no início da string, é oculto
+        return strpos($output[0], 'H') !== false;
+    }
+    return false;
+}
 
-// Tenta abrir o diretório
+$baseDir = __DIR__; // Diretório atual do script
+
 if ($handle = opendir($baseDir)) {
     echo "<!DOCTYPE html>";
     echo "<html lang='pt-br'>";
@@ -27,12 +36,14 @@ if ($handle = opendir($baseDir)) {
     echo "        <ul>";
 
     $hasProjects = false;
-    // Loop através de cada item no diretório
+
     while (false !== ($file = readdir($handle))) {
-        // Ignora "." e "..", que representam o diretório atual e o pai
-        // Ignora também o próprio script 'portal.php' se ele estiver na raiz
-        // Você pode adicionar outras pastas que não quer listar (e.g., 'xampp', 'webalizer')
-        if ($file != "." && $file != ".." && is_dir($baseDir . '/' . $file) && $file != 'portal.php' && $file != 'xampp' && $file != 'dashboard') {
+        $fullPath = $baseDir . '/' . $file;
+
+        if ($file != "." && $file != ".." && is_dir($fullPath) 
+            && $file != 'portal.php' && $file != 'xampp' && $file != 'dashboard'
+            && !isHidden($fullPath)) {
+
             echo "            <li><a href='$file/' target='_blank'>$file</a></li>";
             $hasProjects = true;
         }
@@ -47,7 +58,7 @@ if ($handle = opendir($baseDir)) {
     echo "</body>";
     echo "</html>";
 
-    closedir($handle); // Fecha o diretório
+    closedir($handle);
 } else {
     echo "Não foi possível abrir o diretório base.";
 }
