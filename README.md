@@ -1,9 +1,9 @@
-# 🚀 Projeto Estudo de Relações DB vs PHP ⚙️
+# 🚀 Estudo de Relações DB vs PHP ⚙️
 
 🏻🙏🏻💻❤️🔥⚠️👍🏻🚨😊😂🤣😍😒👌😘💕😁🤷✌💋🌹🎉🎂🤳🐱👤🏍🐉👓🚀
  ✔👀😃✨😆🤔🤢🎁🚗🚓🚒🚚🚛🚜🚔🚖🚍🦽🦼🛹🚲🛴🛵👍🙌🤦
 
-📅 Última atualização: **04/09/2025 22:17:16,72**
+📅 Última atualização: **04/09/2025 22:17:47,51**
 
 ---
 
